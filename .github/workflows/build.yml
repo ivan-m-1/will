@@ -1,15 +1,15 @@
 name: Build Windows EXE
-on: [push] # Собирать будет при каждом обновлении кода
+on: [push]
 
 jobs:
   build:
-    runs-on: windows-latest # Запускаем на Windows сервере
+    runs-on: windows-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Обновлено до v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # Обновлено до v5
         with:
           python-version: '3.12'
 
@@ -20,7 +20,7 @@ jobs:
         run: pyinstaller --onefile --windowed main.py
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # ВАЖНО: Обновлено до v4
         with:
-          name: windows-exe
+          name: windows-exe-file
           path: dist/main.exe
